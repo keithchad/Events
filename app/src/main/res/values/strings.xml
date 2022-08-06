@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Events</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="passed_events">Passed Events</string>
+    <string name="dsc_event_logo">event_logo</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="dsc_add_button">add_button</string>
 </resources>
