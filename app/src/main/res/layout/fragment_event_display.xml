@@ -145,39 +145,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/textEventDetail">
 
                 <EditText
-                    android:id="@+id/editTextEmailSignIn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:autofillHints="emailAddress"
-                    android:fontFamily="@font/ubuntu_regular"
-                    android:hint="Event Name"
-                    android:inputType="textEmailAddress"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutDate"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                app:endIconMode="custom"
-                android:enabled="false"
-                app:endIconTint="@color/purple_200"
-                app:endIconDrawable="@drawable/ic_round_calendar"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
-
-                <EditText
-                    android:id="@+id/editTextDate"
+                    android:id="@+id/editTextEvent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:autofillHints="password"
                     android:fontFamily="@font/ubuntu_regular"
-                    android:hint="Date"
+                    android:hint="Event"
+                    android:textColor="@color/purple_500"
                     android:inputType="date"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -185,13 +160,26 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonDate"
+                style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:cornerRadius="5dp"
+                android:text="Date"
+                android:textSize="18sp"
+                app:icon="@drawable/calendar"
+                android:textAlignment="textStart"
+                android:layout_margin="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout"/>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout3"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDate"
+                app:layout_constraintTop_toBottomOf="@+id/buttonDate"
                 tools:layout_editor_absoluteX="20dp">
 
                 <EditText

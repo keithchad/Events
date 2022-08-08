@@ -1,5 +1,7 @@
 package com.upcomingevents.events.fragment
 
+import android.app.DatePickerDialog
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +13,8 @@ import com.upcomingevents.events.adapter.UnsplashAdapter
 import com.upcomingevents.events.databinding.FragmentEventAddBinding
 import com.upcomingevents.events.databinding.FragmentEventDisplayBinding
 import com.upcomingevents.events.model.Unsplash
+import java.text.SimpleDateFormat
+import java.util.*
 
 class EventDisplayFragment : Fragment() {
 
@@ -26,9 +30,31 @@ class EventDisplayFragment : Fragment() {
         populateData()
         setUpRecyclerView()
 
+        val calender = Calendar.getInstance()
 
+        val datePicker = DatePickerDialog.OnDateSetListener{ _, year, month, dayOfMonth ->
+            calender.set(Calendar.YEAR, year)
+            calender.set(Calendar.MONTH, month)
+            calender.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            updateEditText(calender)
+        }
+
+        binding.buttonDate.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                DatePickerDialog(
+                    requireActivity(), datePicker, calender.get(Calendar.YEAR),
+                    calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH)
+                ).show()
+            }
+        }
 
         return binding.root
+    }
+
+    private fun updateEditText(calender: Calendar) {
+        val format = "dd-MM-yyyy"
+        val sdf = SimpleDateFormat(format, Locale.US)
+        binding.buttonDate.text = sdf.format(calender.time)
     }
 
     private fun setUpRecyclerView() {
