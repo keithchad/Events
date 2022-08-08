@@ -6,4 +6,8 @@
     <string name="dsc_event_logo">event_logo</string>
     <string name="upcoming">Upcoming</string>
     <string name="dsc_add_button">add_button</string>
+    <string name="cd_unsplash_image">unsplash_image</string>
+    <string name="text_from_unsplash">From Unsplash</string>
+    <string name="text_new_event">New Event</string>
+    <string name="text_save">Save</string>
 </resources>
