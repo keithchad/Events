@@ -5,14 +5,15 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.upcomingevents.events.R
 import com.upcomingevents.events.adapter.UnsplashAdapter
-import com.upcomingevents.events.databinding.FragmentEventAddBinding
 import com.upcomingevents.events.databinding.FragmentEventDisplayBinding
 import com.upcomingevents.events.model.Unsplash
 import java.text.SimpleDateFormat
@@ -22,7 +23,9 @@ class EventDisplayFragment : Fragment() {
 
     private lateinit var fragmentEventDisplayBinding: FragmentEventDisplayBinding
     private val binding get() = fragmentEventDisplayBinding
+
     private lateinit var list: List<Unsplash>
+    private lateinit var dropDownList: List<String>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +40,19 @@ class EventDisplayFragment : Fragment() {
             pickImageGallery()
         }
 
+        setUpDropDownList()
+
         return binding.root
+    }
+
+    private fun setUpDropDownList() {
+        val adapterItems: ArrayAdapter<String> = ArrayAdapter(requireActivity(),
+            R.layout.drop_down_list_item, dropDownList)
+        binding.dropDownRemind.setAdapter(adapterItems)
+        binding.dropDownRemind.setOnItemClickListener { parent, _, position, _ ->
+            val item = parent.getItemAtPosition(position).toString()
+            Toast.makeText(activity, item, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setUpDatePicker() {
@@ -80,15 +95,22 @@ class EventDisplayFragment : Fragment() {
 
     private fun populateDummyData() {
         list = arrayListOf(
-            Unsplash(1, R.drawable.u1),
+            Unsplash(0, R.drawable.u1),
             Unsplash(1, R.drawable.u2),
-            Unsplash(1, R.drawable.u3),
-            Unsplash(1, R.drawable.u4),
-            Unsplash(1, R.drawable.u5),
-            Unsplash(1, R.drawable.u6),
-            Unsplash(1, R.drawable.u7),
-            Unsplash(1, R.drawable.u8),
-            Unsplash(1, R.drawable.u9)
+            Unsplash(2, R.drawable.u3),
+            Unsplash(3, R.drawable.u4),
+            Unsplash(4, R.drawable.u5),
+            Unsplash(5, R.drawable.u6),
+            Unsplash(6, R.drawable.u7),
+            Unsplash(7, R.drawable.u8),
+            Unsplash(8, R.drawable.u9)
+        )
+        dropDownList = listOf(
+            "1 Day",
+            "2 Days",
+            "3 Days",
+            "4 Days",
+            "5 Days"
         )
     }
 
@@ -102,7 +124,7 @@ class EventDisplayFragment : Fragment() {
     }
 
     companion object {
-        val IMAGE_REQUEST_CODE = 100
+        const val IMAGE_REQUEST_CODE = 100
     }
 
 }
