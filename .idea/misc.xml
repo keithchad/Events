@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/drawable/rounded_corners.xml" value="0.18" />
         <entry key="app/src/main/res/drawable/unsplash_background.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.17135416666666667" />
+        <entry key="app/src/main/res/layout/drop_down_list_item.xml" value="0.17135416666666667" />
         <entry key="app/src/main/res/layout/fragment_event_add.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_event_display.xml" value="0.33" />
         <entry key="app/src/main/res/layout/unsplash_item.xml" value="0.33" />
