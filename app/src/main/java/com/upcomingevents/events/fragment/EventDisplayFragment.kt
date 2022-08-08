@@ -1,6 +1,8 @@
 package com.upcomingevents.events.fragment
 
+import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -27,16 +29,25 @@ class EventDisplayFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         fragmentEventDisplayBinding = FragmentEventDisplayBinding.inflate(inflater, container, false)
-        populateData()
+        populateDummyData()
         setUpRecyclerView()
+        setUpDatePicker()
 
+        binding.buttonDevice.setOnClickListener {
+            pickImageGallery()
+        }
+
+        return binding.root
+    }
+
+    private fun setUpDatePicker() {
         val calender = Calendar.getInstance()
 
-        val datePicker = DatePickerDialog.OnDateSetListener{ _, year, month, dayOfMonth ->
+        val datePicker = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
             calender.set(Calendar.YEAR, year)
             calender.set(Calendar.MONTH, month)
             calender.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-            updateEditText(calender)
+            updateButtonText(calender)
         }
 
         binding.buttonDate.setOnClickListener {
@@ -47,11 +58,15 @@ class EventDisplayFragment : Fragment() {
                 ).show()
             }
         }
-
-        return binding.root
     }
 
-    private fun updateEditText(calender: Calendar) {
+    private fun pickImageGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_REQUEST_CODE)
+    }
+
+    private fun updateButtonText(calender: Calendar) {
         val format = "dd-MM-yyyy"
         val sdf = SimpleDateFormat(format, Locale.US)
         binding.buttonDate.text = sdf.format(calender.time)
@@ -63,7 +78,7 @@ class EventDisplayFragment : Fragment() {
         binding.recyclerViewUnsplash.adapter = unsplashAdapter
     }
 
-    private fun populateData() {
+    private fun populateDummyData() {
         list = arrayListOf(
             Unsplash(1, R.drawable.u1),
             Unsplash(1, R.drawable.u2),
@@ -75,6 +90,19 @@ class EventDisplayFragment : Fragment() {
             Unsplash(1, R.drawable.u8),
             Unsplash(1, R.drawable.u9)
         )
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
+            if (data != null) {
+                binding.imageCardBackground.setImageURI(data.data)
+            }
+        }
+    }
+
+    companion object {
+        val IMAGE_REQUEST_CODE = 100
     }
 
 }
